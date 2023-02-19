@@ -8,8 +8,5 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mgravey/unpromise.js"
-  },
-  "dependencies": {
-    "unpromise": "^0.0.1"
   }
 }

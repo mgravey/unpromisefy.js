@@ -1,12 +1,12 @@
 {
-  "name": "unpromise",
+  "name": "unpromisefy",
   "version": "1.0.0",
   "description": "A Node.js addon to convert a resolved Promise into a non-Promise value. It provide a way to access the value inside a Promise without using then or await. However, it's important to note that this module should only be used as a last resort, after exploring all other possible solutions. In most cases, such a module is not necessary. But, if you come across a poorly designed package, this module can potentially save you days of redesign work.",
-  "main": "./build/Release/unpromise.node",
+  "main": "./build/Release/unpromisefy.node",
   "author": "Dr. Mathieu Gravey <research@mgravey.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mgravey/unpromise.js"
+    "url": "git+https://github.com/mgravey/unpromisefy.js"
   }
 }

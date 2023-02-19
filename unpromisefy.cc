@@ -3,7 +3,7 @@
 using namespace v8;
 
 // This is the function that will be called when the module is loaded
-void unPromised(const FunctionCallbackInfo<Value>& args) {
+void unpromisefy(const FunctionCallbackInfo<Value>& args) {
   // Create a scope to manage memory allocation
   Isolate* isolate = args.GetIsolate();
   HandleScope scope(isolate);
@@ -17,7 +17,7 @@ void unPromised(const FunctionCallbackInfo<Value>& args) {
 
 // This is the function that will be called when the module is loaded
 void Init(Local<Object> exports) {
-  NODE_SET_METHOD(exports, "unPromised", unPromised);
+  NODE_SET_METHOD(exports, "unpromisefy", unpromisefy);
 }
 
 // Define the module name and the function that will be called when the module is loaded

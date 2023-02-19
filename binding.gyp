@@ -1,8 +1,8 @@
 {
   "targets": [
     {
-      "target_name": "unpromise",
-      "sources": [ "unpromise.cc" ]
+      "target_name": "unpromisefy",
+      "sources": [ "unpromisefy.cc" ]
     }
   ]
 }

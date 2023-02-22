@@ -32,7 +32,8 @@ jobs:
         rm -rf ./build
     - name: Switch to bin branch
       uses: actions/checkout@v3
-        ref: bin
+      ref: bin
+    - name: add, commit and push
       run: |
         git add ./builds
         git config --global user.email "github.action@nothing.com"

@@ -19,7 +19,7 @@
     "module_name": "unpromisefy",
     "module_path": "./build/Release/",
     "host": "https://github.com/mgravey/unpromisefy.js/",
-    "remote_path": "./raw/bin/{version}/{platform}/{arch}/",
+    "remote_path": "./raw/bin/builds/{version}/{platform}/{arch}/",
     "package_name": "{module_name}-{node_abi}-{platform}-{arch}.tar.gz"
   }
 }

@@ -4,23 +4,34 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-strategy:
-  matrix:
-    os: [ubuntu-latest, macos-latest, windows-latest]
-    node-version: [12.x, 14.x, 16.x]
-    arch: [x64, arm64]
-
 jobs:
-  build-and-test:
-    runs-on: ${{ matrix.os }}
+  build-and-submit:
+    name: Compile for ${{ matrix.os }}-${{ matrix.arch }} using node ${{ matrix.node-version }} and upload on the bin branch
     strategy:
       matrix:
-        node-version: [${{ matrix.node-version }}]
-        arch: [${{ matrix.arch }}]
-
-    steps:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        node-version: [12.x, 14.x, 16.x]
+        arch: [x64, arm64]
     - name: Checkout code
       uses: actions/checkout@v3
     - name: set node
       uses: actions/setup-node@v3
-
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: install
+      run: |
+        npm install node-gyp node-pre-gyp -g
+    - name: compile and package
+      run: node-pre-gyp configure build package
+    - name : copy results
+      run : |
+        mv ./build/stage/raw/bin/builds ./builds
+        rm -rf ./build
+    - name: Switch to bin branch
+      run: |
+        git checkout origin/bin
+        git add ./builds
+        git config --global user.email "github.action@nothing.com"
+        git config --global user.name "Github Action"
+        git commit -m "add binary"
+        git push origin bin

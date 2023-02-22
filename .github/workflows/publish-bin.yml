@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-and-submit:
+  build-and-save:
     name: Compile for ${{ matrix.os }}-${{ matrix.arch }} using node ${{ matrix.node-version }} and upload on the bin branch
     strategy:
       matrix:
@@ -17,9 +17,6 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
-      with:
-        ref: main
-        persist-credentials: true
     - name: set node
       uses: actions/setup-node@v3
       with:
@@ -31,16 +28,28 @@ jobs:
       run: node-pre-gyp configure build package
     - name : copy results
       run : |
-        mv ./build/stage/raw/bin/builds ./
+        mv ./build/stage/raw/bin/builds ./builds
         rm -rf ./build
+    - name: Upload data
+      uses: actions/upload-artifact@v2
+      with:
+        name: Builds
+        path: ./builds
+
+  load-and-commit:
+    runs-on: ubuntu-latest
+    steps:
     - name: Switch to bin branch
       uses: actions/checkout@v3
       with:
         ref: bin
-        fetch-depth: 0
+    - name: Download data
+      uses: actions/download-artifact@v2
+      with:
+        name: Builds
     - name: add, commit and push
       run: |
-        ls -al 
+        ls -al
         git add ./builds
         git config --global user.email "github.action@nothing.com"
         git config --global user.name "Github Action"

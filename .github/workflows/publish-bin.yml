@@ -36,6 +36,7 @@ jobs:
         ref: bin
     - name: add, commit and push
       run: |
+        ll 
         git add ./builds
         git config --global user.email "github.action@nothing.com"
         git config --global user.name "Github Action"

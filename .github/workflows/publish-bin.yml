@@ -9,9 +9,11 @@ jobs:
     name: Compile for ${{ matrix.os }}-${{ matrix.arch }} using node ${{ matrix.node-version }} and upload on the bin branch
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        os: [ubuntu-latest]
+        #, macos-latest, windows-latest]
         node-version: [12.x, 14.x, 16.x]
-        arch: [x64, arm64]
+        arch: [x64]
+        #, arm64]
       fail-fast: true
     runs-on: ${{ matrix.os }}
     steps:
@@ -26,14 +28,12 @@ jobs:
         npm install node-gyp node-pre-gyp -g
     - name: compile and package
       run: node-pre-gyp configure build package
-    - name : copy results
-      run : |
-        mv ./build/stage/raw/bin/builds ./builds
     - name: Upload data
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: Builds
-        path: ./builds
+        path: ./build/stage/raw/bin/
+        retention-days: 1
 
   load-and-commit:
     needs: build-and-save
@@ -44,13 +44,13 @@ jobs:
       with:
         ref: bin
     - name: Download data
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v3
       with:
         name: Builds
     - name: add, commit and push
       run: |
         ls -al
-        git add ./builds
+        git add ./*
         git config --global user.email "github.action@nothing.com"
         git config --global user.name "Github Action"
         git commit -m "add binary"

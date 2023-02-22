@@ -1,0 +1,26 @@
+name: Publish compile and publish binary
+
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+strategy:
+  matrix:
+    os: [ubuntu-latest, macos-latest, windows-latest]
+    node-version: [12.x, 14.x, 16.x]
+    arch: [x64, arm64]
+
+jobs:
+  build-and-test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        node-version: [${{ matrix.node-version }}]
+        arch: [${{ matrix.arch }}]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - name: set node
+      uses: actions/setup-node@v3
+

@@ -8,5 +8,18 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mgravey/unpromisefy.js"
+  },
+  "dependencies"  : {
+    "@mapbox/node-pre-gyp": "1.x"
+  },
+  "scripts": {
+    "install": "node-pre-gyp install --fallback-to-build"
+  },
+  "binary": {
+    "module_name": "unpromisefy",
+    "module_path": "./build/Release/",
+    "host": "https://github.com/mgravey/unpromisefy.js/",
+    "remote_path": "./raw/bin/{version}/{platform}/{arch}/",
+    "package_name": "{module_name}-{node_abi}-{platform}-{arch}.tar.gz"
   }
 }

@@ -30,11 +30,11 @@ jobs:
       run : |
         mv ./build/stage/raw/bin/builds ./
         rm -rf ./build
-        ls -al 
     - name: Switch to bin branch
-      run: git branch -r
-    - name: Switch to bin branch
-      run: git checkout bin
+      uses: actions/checkout@v3
+      with:
+        ref: bin
+        fetch-depth: 0
     - name: add, commit and push
       run: |
         ls -al 

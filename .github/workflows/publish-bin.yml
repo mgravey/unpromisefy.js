@@ -29,7 +29,6 @@ jobs:
     - name : copy results
       run : |
         mv ./build/stage/raw/bin/builds ./builds
-        rm -rf ./build
     - name: Upload data
       uses: actions/upload-artifact@v2
       with:

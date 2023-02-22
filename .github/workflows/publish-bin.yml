@@ -37,6 +37,7 @@ jobs:
         path: ./builds
 
   load-and-commit:
+    needs: build-and-save
     runs-on: ubuntu-latest
     steps:
     - name: Switch to bin branch

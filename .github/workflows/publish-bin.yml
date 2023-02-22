@@ -32,6 +32,8 @@ jobs:
         rm -rf ./build
         ls -al 
     - name: Switch to bin branch
+      run: git checkout -r
+    - name: Switch to bin branch
       run: git checkout bin
     - name: add, commit and push
       run: |
